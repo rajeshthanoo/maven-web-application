@@ -104,7 +104,7 @@
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://3.108.51.87/:8081/repository/ensono-snapshot/</url>
+	      <url>http://3.108.51.87:8081/repository/ensono-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
