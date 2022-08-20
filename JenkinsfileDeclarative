@@ -5,8 +5,9 @@ pipeline {
         maven "maven3.8.6"
     }
     
-    triggers {
-  pollSCM '* * * * *'
+   triggers {
+  cron '* * * * *'
+}
 }
 
     stages {
