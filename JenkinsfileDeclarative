@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    
+    tools{
+        maven "maven3.8.6"
+    }
+
+    stages {
+        stage('checkout') {
+            steps {
+                git credentialsId: '5e45d9e4-5b4c-4fc6-b8a0-a4d3f7319db9', url: 'https://github.com/rajeshthanoo/maven-web-application.git'
+            }
+        }
+        stage('build'){
+         steps {
+             sh "mvn clean package"
+         }
+        }
+        stage('executing sonarqube'){
+        steps {
+            sh "mvn sonar:sonar"
+        }
+        }
+        stage('upload Artifacts to Nexus'){
+            steps {
+                sh "mvn deploy"
+            }
+        }
+        stage('deploy to tomcat'){
+            steps {
+                sshagent(['0f9f80e8-1bc3-4dfd-9e42-6e9873b061e5']) {
+    sh "cp -R target/maven-web-application.war /opt/tomcat9/webapps/"
+               }
+            }
+        }
+    }//stagesclose
+}//pipelineclose
